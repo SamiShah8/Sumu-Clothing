@@ -2,12 +2,15 @@ import "./App.css";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { FaCartArrowDown } from "react-icons/fa";
 import { FaSearch } from "react-icons/fa";
-import Logo from "./assets/rainbow-logo.png";
+import Logo from "./assets/logo.png";
 import { ImCross } from "react-icons/im";
 import { useState } from "react";
+import AuthModal from "./components/auth_modal";
 
 function App() {
   const [showMobileNav, setShowMobileNav] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+
 
   function showMenu() {
     setShowMobileNav(true);
@@ -16,9 +19,12 @@ function App() {
   function hideMenu() {
     setShowMobileNav(false);
   }
+  const openModal = () =>{
+setShowModal(true);
+  }
 
   return (
-    <header className="border-b border-gray-400">
+    <header className="border-b border-gray-400 ">
       <div className="container--fluid">
         <div className="flex justify-between items-center py-4 md:hidden ">
           <div className="border border-[--var(btn-color)]-500 rounded-lg md:hidden hover:border-[var(--secondary-color)]  sm:hidden">
@@ -37,12 +43,12 @@ function App() {
           </div>
 
           <div className="border border-[--var(btn-color)]-500 rounded-lg hover:border-[var(--secondary-color)] ">
-            <FaCartArrowDown className="h-[2rem] w-[2rem] p-2 cursor-pointer" />
+            <FaCartArrowDown className="h-[2rem] w-[2rem] p-2 cursor-pointer z-50" />
           </div>
         </div>
 
         {/* navlinks */}
-        <nav className={`mt-1 ${showMobileNav ? "block" : "hidden"} md:hidden`}>
+        <nav className={`mt-1 ${showMobileNav ? "block" : "hidden"}   md:hidden  bg-[var(--specific-color)]`}>
           <div className="text-[0.8rem] ">
             <div className="relative flex items-center ">
               <input
@@ -100,13 +106,15 @@ function App() {
           </div>
           <div className=" xl:w-[33.33%] flex justify-end gap-4 lg:w-[30%]">
             <FaCartArrowDown className="h-[2rem] w-[2rem] p-2 cursor-pointer border border-[--var(btn-color)]-500  rounded-lg hover:border-[var(--secondary-color)]" />
-            <button className="border border-[--var(btn-color)]-600 rounded-lg hidden md:block px-2.5 py-1 py text-[0.6rem] font-extrabold">
+            <button onClick={openModal} className="border border-[--var(btn-color)]-600 rounded-lg hidden md:block px-2.5 py-1 py text-[0.6rem] font-extrabold">
               Hello, Signin
             </button>
           </div>
 
         </div>
       </div>
+      {/* auth model */}
+      <AuthModal showModal={showModal} setShowModal={setShowModal} />
     </header>
   );
 }
