@@ -5,7 +5,9 @@ import { FaSearch } from "react-icons/fa";
 import Logo from "./assets/logo.png";
 import { ImCross } from "react-icons/im";
 import { useState } from "react";
+
 import FlipCard from "./components/FlipCard";
+
 function App() {
   const [showMobileNav, setShowMobileNav] = useState(false);
 
@@ -135,6 +137,7 @@ function App() {
           </div>
         </div>
       </div>
+
       <FlipCard crossBtn={crossBtn} setCrossBtn={setCrossBtn} />
     </header>
   );
