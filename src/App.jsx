@@ -137,7 +137,6 @@ function App() {
           </div>
         </div>
       </div>
-
       <FlipCard crossBtn={crossBtn} setCrossBtn={setCrossBtn} />
     </header>
   );
