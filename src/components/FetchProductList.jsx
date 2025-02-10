@@ -17,18 +17,18 @@ export default function FetchProductList() {
   }, []);
 
   return (
-    <div>
+    <div className="border-2 border-red-600 md:grid mx-auto lg:grid  md:grid-cols-2 lg:grid-cols-3  lg:gap-6 md:gap-1">
       {info.map((products, index) => {
         return (
-          <div key={products.id}>
-            <div className="h-[300px] w-[300px] my-6 mx-auto relative border-2 border-gray-200 bg-white rounded-lg">
+          <div key={products.id} className="mx-auto">
+            <div className="h-[19rem] w-[19rem] md:h-[24rem] md:w-[24rem] my-6  mx-auto relative border-2 border-gray-200 bg-white rounded-lg">
               <img
                 src={products.thumbnail}
                 className="h-[100%]"
                 alt={products.title}
               />
 
-              <div className="flex border-2 items-center absolute bottom-3 py-1 pl-4 pr-2 justify-between gap-4 left-2 border-gray-200 bg-white rounded-full">
+              <div className="flex border-2 items-center  absolute bottom-3 py-1 pl-4 pr-2 justify-between gap-4 left-2 border-gray-200 bg-white rounded-full">
                 <p className="text-xs font-semibold">{products.brand}</p>
                 <div className="bg-blue-500 rounded-full p-2 text-sm text-white font-semibold">
                   <p>${products.price}</p>
