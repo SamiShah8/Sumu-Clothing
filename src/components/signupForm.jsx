@@ -9,11 +9,8 @@ function SignupForm() {
   const [passwordErr, setPasswordErr] = useState("");
   const [emailErr, setemailErr] = useState("");
   const [signupForm, setSignupForm] = useState("");
-    const [username, setUsername] = useState("");
-      const [password, setPassword] = useState("");
-
-
-  
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
 
   const SignupSubmit = (e) => {
     e.preventDefault();
@@ -81,7 +78,7 @@ function SignupForm() {
     setsignupPassword(e.target.value);
   };
   return (
-    <form onSubmit={SignupSubmit} className="flex flex-col   w-[90%] ">
+    <form onSubmit={SignupSubmit} className="flex flex-col w-[90%]">
       <input
         type="text"
         placeholder="Username"
