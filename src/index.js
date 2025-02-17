@@ -6,8 +6,4 @@ import ReactContext from "./components/ReactContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
-root.render(
-  <React.StrictMode>
-    <FetchProductList />
-  </React.StrictMode>
-);
+root.render(<FetchProductList />);

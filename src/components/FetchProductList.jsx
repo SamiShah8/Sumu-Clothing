@@ -1,38 +1,37 @@
 import axios, { isAxiosError } from "axios";
 import { useEffect, useState } from "react";
+const url = "https://api.freeapi.app/api/v1/public/randomproducts?query=";
 
 export default function FetchProductList() {
   const [products, setProducts] = useState([]);
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(true);
+  const [query, setQuery] = useState("mens-watches");
 
   useEffect(() => {
-    const Promise = axios.get(
-      "https://api.freeapi.app/api/v1/public/randomproducts?page=1&limit=10&inc=category%252Cprice%252Cthumbnail%252Cimages%252Ctitle%252Cid&query=mens-watches"
-    );
-
-    Promise.then((response) => {
-      setProducts(response.data.data.data);
-      setIsLoading(false);
-    }).catch((err) => {
-      console.log(err);
-
-      if (isAxiosError(err)) {
-        if (err.response) {
-          setError(
-            "error from server. don't know the message format yet. we will create our own server and send the agreed msg format between client and server"
-          );
-        } else if (err.request) {
-          setError(err.message);
+    axios
+      .get(url + query)
+      .then((response) => {
+        setProducts(response.data.data.data);
+        setIsLoading(false);
+      })
+      .catch((err) => {
+        if (isAxiosError(err)) {
+          if (err.response) {
+            setError(
+              "error from server. don't know the message format yet. we will create our own server and send the agreed msg format between client and server"
+            );
+          } else if (err.request) {
+            setError(err.message);
+          } else {
+            setError(err.message);
+          }
         } else {
-          setError(err.message);
+          setError("something went wrong");
         }
-      } else {
-        setError("something went wrong");
-      }
-      setIsLoading(false);
-    });
-  }, []);
+        setIsLoading(false);
+      });
+  }, [query]);
 
   if (error) {
     return <h1>{error}</h1>;
@@ -40,25 +39,39 @@ export default function FetchProductList() {
 
   if (isLoading) {
     return (
-      <div className="loading-spinner border-[8px] border-t-blue-500 border-t-[8px] border-gray-300 rounded-[50%] h-[40px] w-[40px]"></div>
+      <div className="flex justify-center items-center h-[100vh]">
+        <div className="loading-spinner border-[8px] border-t-blue-500 border-t-[8px] border-gray-300 rounded-[50%] h-[40px] w-[40px]"></div>
+      </div>
     );
   }
 
   return (
     <div className="max-w-[1440px] mx-auto flex  justify-center">
       {/* collection */}
-      <div className="flex flex-col px-3 text-[14px] gap-1">
-        <p className="text-[13px] text-gray-500">Collections</p>
+      <div className="flex flex-col px-3 text-[0.8rem] gap-1">
+        <p className="text-[0.7rem] text-gray-500">Collections</p>
         <p className="underline">All</p>
         <ul>
           <li className="flex flex-col">
-            <a className="hover:underline" href="#">
+            <a
+              onClick={() => setQuery("shoes")}
+              className="hover:underline"
+              href="#"
+            >
               Bags
             </a>
-            <a className="hover:underline" href="#">
+            <a
+              onClick={() => setQuery("sweaters")}
+              className="hover:underline"
+              href="#"
+            >
               Drinkware
             </a>
-            <a className="hover:underline" href="#">
+            <a
+              onClick={() => setQuery("t-shirt")}
+              className="hover:underline"
+              href="#"
+            >
               Footware
             </a>
             <a className="hover:underline" href="#">
@@ -85,18 +98,18 @@ export default function FetchProductList() {
           </li>
         </ul>
       </div>
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 flex-1 lg:grid-cols-3 lg:gap-8 md:gap-6">
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 flex-1 lg:grid-cols-3  lg:gap-8 md:gap-6">
         {products.map((product) => {
           return (
             <div
               key={product.id}
-              className="relative border-2 border-gray-200 rounded-lg"
+              className="relative border-2 border-gray-200 rounded-lg hover:border-blue-500"
             >
               {/* product image  */}
-              <div className="rounded-lg">
+              <div className="rounded-lg overflow-hidden">
                 <img
                   src={product.thumbnail}
-                  className="h-full w-full"
+                  className="h-full w-full rounded-lg transition-transform duration-300 hover:scale-105 ease-in-out product-img"
                   alt={product.title}
                 />
               </div>
@@ -112,8 +125,8 @@ export default function FetchProductList() {
         })}
       </div>
       {/* short by */}
-      <div className="flex flex-col  text-[14px] px-3 gap-1">
-        <p className="text-[13px] text-gray-500">Sort by</p>
+      <div className="flex flex-col  text-[0.8rem] px-3 gap-1">
+        <p className="text-[0.7rem] text-gray-500">Sort by</p>
         <p className="underline"> Relevance</p>
         <ul>
           <li className="flex flex-col ">
