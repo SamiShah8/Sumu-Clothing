@@ -21,8 +21,6 @@ export default function FetchProductList() {
             setError(
               "error from server. don't know the message format yet. we will create our own server and send the agreed msg format between client and server"
             );
-          } else if (err.request) {
-            setError(err.message);
           } else {
             setError(err.message);
           }
@@ -45,6 +43,26 @@ export default function FetchProductList() {
     );
   }
 
+  const Catagories = [
+    { name: "Bags", query: "bags" },
+    { name: "Drinkware", query: "sweaters" },
+    { name: "Footwar", query: "shoes" },
+    { name: " Headwear", query: "laptops" },
+    { name: "Hoodies", query: "smartphones" },
+    { name: "Jackets", query: "" },
+    { name: "Kids", query: "" },
+    { name: "Pet", query: "" },
+    { name: "Shirts", query: "" },
+    { name: "Stikers", query: "" },
+  ];
+  const Sort = [
+    { name: "Trending", query: "bags" },
+    { name: "Latest", query: "sweaters" },
+    { name: " arrivals", query: "shoes" },
+    { name: " Price: Low to high", query: "laptop" },
+    { name: " Price: High to low", query: "smartphones" },
+  ];
+
   return (
     <div className="max-w-[1440px] mx-auto flex  justify-center">
       {/* collection */}
@@ -52,50 +70,17 @@ export default function FetchProductList() {
         <p className="text-[0.7rem] text-gray-500">Collections</p>
         <p className="underline">All</p>
         <ul>
-          <li className="flex flex-col">
-            <a
-              onClick={() => setQuery("shoes")}
-              className="hover:underline"
-              href="#"
-            >
-              Bags
-            </a>
-            <a
-              onClick={() => setQuery("sweaters")}
-              className="hover:underline"
-              href="#"
-            >
-              Drinkware
-            </a>
-            <a
-              onClick={() => setQuery("t-shirt")}
-              className="hover:underline"
-              href="#"
-            >
-              Footware
-            </a>
-            <a className="hover:underline" href="#">
-              Headwear
-            </a>
-            <a className="hover:underline" href="#">
-              Hoodies
-            </a>
-            <a className="hover:underline" href="#">
-              Jackets
-            </a>
-            <a className="hover:underline" href="#">
-              Kids
-            </a>
-            <a className="hover:underline" href="#">
-              Pets
-            </a>
-            <a className="hover:underline" href="#">
-              Shirts
-            </a>
-            <a className="hover:underline" href="#">
-              Stickers
-            </a>
-          </li>
+          {Catagories.map((catagory, index) => (
+            <li key={index} className="flex flex-col">
+              <a
+                onClick={() => catagory.query && setQuery(catagory.query)}
+                className="hover:underline"
+                href="#"
+              >
+                {catagory.name}
+              </a>
+            </li>
+          ))}
         </ul>
       </div>
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 flex-1 lg:grid-cols-3  lg:gap-8 md:gap-6">
@@ -129,23 +114,17 @@ export default function FetchProductList() {
         <p className="text-[0.7rem] text-gray-500">Sort by</p>
         <p className="underline"> Relevance</p>
         <ul>
-          <li className="flex flex-col ">
-            <a className="hover:underline" href="#">
-              Trending
-            </a>
-            <a className="hover:underline" href="#">
-              Latest
-            </a>
-            <a className="hover:underline " href="#">
-              arrivals
-            </a>
-            <a className="hover:underline " href="#">
-              Price: Low to high
-            </a>
-            <a className="hover:underline " href="#">
-              Price: High to low
-            </a>
-          </li>
+          {Sort.map((sorting, index) => (
+            <li key={index} className="flex flex-col ">
+              <a
+                onClick={() => sorting.query && setQuery(sorting.query)}
+                className="hover:underline"
+                href="#"
+              >
+                {sorting.name}
+              </a>
+            </li>
+          ))}
         </ul>
       </div>
     </div>
