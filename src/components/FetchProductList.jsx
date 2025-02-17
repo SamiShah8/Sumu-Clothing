@@ -1,7 +1,8 @@
 import axios, { isAxiosError } from "axios";
 import { useEffect, useState } from "react";
 const url = "https://api.freeapi.app/api/v1/public/randomproducts?query=";
-
+import Categories from "../data/category";
+import Sort from "../data/Sort";
 export default function FetchProductList() {
   const [products, setProducts] = useState([]);
   const [error, setError] = useState("");
@@ -43,26 +44,6 @@ export default function FetchProductList() {
     );
   }
 
-  const Catagories = [
-    { name: "Bags", query: "bags" },
-    { name: "Drinkware", query: "sweaters" },
-    { name: "Footwar", query: "shoes" },
-    { name: " Headwear", query: "laptops" },
-    { name: "Hoodies", query: "smartphones" },
-    { name: "Jackets", query: "" },
-    { name: "Kids", query: "" },
-    { name: "Pet", query: "" },
-    { name: "Shirts", query: "" },
-    { name: "Stikers", query: "" },
-  ];
-  const Sort = [
-    { name: "Trending", query: "bags" },
-    { name: "Latest", query: "sweaters" },
-    { name: " arrivals", query: "shoes" },
-    { name: " Price: Low to high", query: "laptop" },
-    { name: " Price: High to low", query: "smartphones" },
-  ];
-
   return (
     <div className="max-w-[1440px] mx-auto flex  justify-center">
       {/* collection */}
@@ -70,14 +51,14 @@ export default function FetchProductList() {
         <p className="text-[0.7rem] text-gray-500">Collections</p>
         <p className="underline">All</p>
         <ul>
-          {Catagories.map((catagory, index) => (
-            <li key={index} className="flex flex-col">
+          {Categories.map((category, index) => (
+            <li key={category.id} className="flex flex-col">
               <a
-                onClick={() => catagory.query && setQuery(catagory.query)}
+                onClick={() => category.query && setQuery(category.query)}
                 className="hover:underline"
                 href="#"
               >
-                {catagory.name}
+                {category.name}
               </a>
             </li>
           ))}
