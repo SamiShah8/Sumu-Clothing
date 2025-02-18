@@ -1,9 +1,9 @@
-import Sort from "../data/sort";
+import Sort from "../data/Sort";
 
-function SortList(input) {
+function SortList(props) {
   const clickSortHandler = (query) => {
     if (query) {
-      input.updateQuery(query);
+      props.updateQuery(query);
     }
   };
   return (

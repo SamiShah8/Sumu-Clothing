@@ -1,9 +1,9 @@
-import ShortList from "../components/shortList.jsx";
-import CategoryList from "./categoryList.jsx";
+import ShortList from "./SortList.jsx";
+import CategoryList from "./CategoryList.jsx";
 import axios, { isAxiosError } from "axios";
 import { useEffect, useState } from "react";
 
-const url = "https://api.freeapi.app/api/v1/public/randomproducts?query=";
+const url = "https://api.freeapi.app/api/v1/publi/randomproducts?query=";
 
 export default function FetchProductList() {
   const [products, setProducts] = useState([]);
@@ -24,18 +24,22 @@ export default function FetchProductList() {
             setError(
               "error from server. don't know the message format yet. we will create our own server and send the agreed msg format between client and server"
             );
-          } else {
+          } else if (err.request) {
             setError(err.message);
           }
         } else {
-          setError("something went wrong");
+          setError("something went wrong......");
         }
         setIsLoading(false);
       });
   }, [query]);
 
   if (error) {
-    return <h1>{error}</h1>;
+    return (
+      <div className="flex  justify-center items-center h-[100vh]">
+        <h1>{error}</h1>
+      </div>
+    );
   }
 
   if (isLoading) {

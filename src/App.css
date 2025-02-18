@@ -9,10 +9,11 @@
   --secondary-color: #705c53;
   --btn-color: #b7b7b7;
   --specific-color: #eddfe0;
+  --primary-font: "Geist Mono", serif;
 }
 
 body {
-  font-family: "Geist Mono", serif;
+  font-family: var(--primary-font);
   color: #000;
   font-size: 1rem;
   line-height: 1.5;
