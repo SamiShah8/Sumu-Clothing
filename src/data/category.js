@@ -1,4 +1,4 @@
-export default Categories = [
+const Categories = [
   { id: 1, name: "Bags", query: "bags" },
   { id: 2, name: "Drinkware", query: "sweaters" },
   { id: 3, name: "Footwar", query: "shoes" },
@@ -10,3 +10,5 @@ export default Categories = [
   { id: 9, name: "Shirts", query: "laptops" },
   { id: 10, name: "Stikers", query: "bags" },
 ];
+
+export default Categories;

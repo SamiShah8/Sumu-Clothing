@@ -1,8 +1,10 @@
+import ShortList from "../components/shortList.jsx";
+import CategoryList from "./categoryList.jsx";
 import axios, { isAxiosError } from "axios";
 import { useEffect, useState } from "react";
+
 const url = "https://api.freeapi.app/api/v1/public/randomproducts?query=";
-import Categories from "../data/category";
-import Sort from "../data/Sort";
+
 export default function FetchProductList() {
   const [products, setProducts] = useState([]);
   const [error, setError] = useState("");
@@ -47,23 +49,7 @@ export default function FetchProductList() {
   return (
     <div className="max-w-[1440px] mx-auto flex  justify-center">
       {/* collection */}
-      <div className="flex flex-col px-3 text-[0.8rem] gap-1">
-        <p className="text-[0.7rem] text-gray-500">Collections</p>
-        <p className="underline">All</p>
-        <ul>
-          {Categories.map((category, index) => (
-            <li key={category.id} className="flex flex-col">
-              <a
-                onClick={() => category.query && setQuery(category.query)}
-                className="hover:underline"
-                href="#"
-              >
-                {category.name}
-              </a>
-            </li>
-          ))}
-        </ul>
-      </div>
+      <CategoryList updateCategoryQuery={setQuery} />
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 flex-1 lg:grid-cols-3  lg:gap-8 md:gap-6">
         {products.map((product) => {
           return (
@@ -91,23 +77,7 @@ export default function FetchProductList() {
         })}
       </div>
       {/* short by */}
-      <div className="flex flex-col  text-[0.8rem] px-3 gap-1">
-        <p className="text-[0.7rem] text-gray-500">Sort by</p>
-        <p className="underline"> Relevance</p>
-        <ul>
-          {Sort.map((sorting, index) => (
-            <li key={index} className="flex flex-col ">
-              <a
-                onClick={() => sorting.query && setQuery(sorting.query)}
-                className="hover:underline"
-                href="#"
-              >
-                {sorting.name}
-              </a>
-            </li>
-          ))}
-        </ul>
-      </div>
+      <ShortList updateQuery={setQuery} />
     </div>
   );
 }
